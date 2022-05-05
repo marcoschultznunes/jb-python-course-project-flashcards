@@ -1,5 +1,3 @@
-import os
-
 from Cards import Cards
 
 
@@ -9,10 +7,14 @@ def import_cards():
     try:
         cards_file = open(name, "r")
 
+        Cards.clear_cards()
+
         for line in cards_file:
             vals = line.rstrip().split(":")
-            Cards.add_card(vals[0], vals[1])
+            Cards.add_card(vals[0], vals[1], vals[2])
             loaded += 1
+
+        cards_file.close()
     except FileNotFoundError:
         print("File not found.")
     else:
