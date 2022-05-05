@@ -1,11 +1,11 @@
 from Cards import Cards
 
 
-def import_cards():
-    name = input("File name:\n")
+def load_cards(f_name):
     loaded = 0
+
     try:
-        cards_file = open(name, "r")
+        cards_file = open(f_name, "r")
 
         Cards.clear_cards()
 
@@ -19,3 +19,8 @@ def import_cards():
         print("File not found.")
     else:
         print(f"{loaded} cards have been loaded.")
+
+
+def import_cards():
+    name = input("File name:\n")
+    load_cards(name)

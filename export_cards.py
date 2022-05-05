@@ -1,11 +1,9 @@
 from Cards import Cards
 
 
-def export_cards():
-    name = input("File name:\n")
-
+def save_cards(f_name):
     try:
-        cards_file = open(name, "w")
+        cards_file = open(f_name, "w")
 
         for card in Cards.cards:
             cards_file.write(f"{card}\n")
@@ -15,3 +13,9 @@ def export_cards():
         print("Error: Could not save cards.")
     else:
         print(f"{len(Cards.cards)} cards have been saved.")
+
+
+def export_cards():
+    name = input("File name:\n")
+    save_cards(name)
+

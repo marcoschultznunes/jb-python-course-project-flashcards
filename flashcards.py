@@ -1,12 +1,13 @@
 from add import add
 from remove import remove
 from ask import ask
-from import_cards import import_cards
-from export_cards import export_cards
+from import_cards import import_cards, load_cards
+from export_cards import export_cards, save_cards
 from hardest_card import hardest_card
 from reset_stats import reset_stats
 from log import save_log, LoggerIn, LoggerOut
 import sys
+import argparse
 
 
 def main_menu():
@@ -32,11 +33,24 @@ def main_menu():
 
 
 def main():
+    # Logging inputs and outputs
     sys.stdout = LoggerOut()
     sys.stdin = LoggerIn()
 
-    while main_menu() != "exit":
+    # arguments => import and export
+    arg_parser = argparse.ArgumentParser()
+    arg_parser.add_argument("--import_from", type=str)
+    arg_parser.add_argument("--export_to", type=str)
+    args = arg_parser.parse_args()
+
+    if args.import_from:
+        load_cards(args.import_from)
+
+    while main_menu(args) != "exit":
         pass
+
+    if args.export_to:
+        save_cards(args.export_to)  # export when exit && arg
 
 
 main()
